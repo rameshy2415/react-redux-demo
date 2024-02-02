@@ -1,0 +1,45 @@
+.agnt_search {
+  display: flex;
+  padding: 2px;
+}
+
+.card_width {
+  width: 40rem;
+}
+
+
+.agnt_search_btn {
+  margin-left: 0.5rem;
+}
+
+.agentTableView {
+  margin-top: 0.8rem;
+  cursor: pointer;
+}
+
+.agent_info_body {
+  display: flex;
+  justify-content: space-between;
+}
+
+.agent_info_btn {
+  margin-top: 5rem;
+  float: right;
+}
+
+.save_btn {
+  float: right;
+}
+
+.workflow_card {}
+
+.workflow_party_type {
+  float: left;
+  /* margin-left: 6rem; */
+
+}
+
+.workflow_account_type {
+  float: right;
+  /* margin-right: 6rem; */
+}
