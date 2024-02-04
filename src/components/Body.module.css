@@ -23,23 +23,28 @@
 }
 
 .agent_info_btn {
-  margin-top: 5rem;
+  margin-top: 3rem;
   float: right;
 }
 
 .save_btn {
   float: right;
+  margin-top: 1rem;
 }
 
-.workflow_card {}
+.workflow_select {
+  width: 15rem !important;
+  
+}
 
 .workflow_party_type {
   float: left;
-  /* margin-left: 6rem; */
-
 }
 
 .workflow_account_type {
   float: right;
-  /* margin-right: 6rem; */
+}
+
+.workflow_label{
+  margin-left: 5rem;
 }

@@ -1,4 +1,6 @@
 import { legacy_createStore as createStore } from "redux";
+import { AgentModel } from "../model/agent.model";
+import { WorkFlowModel } from "../model/workflow.model";
 
 const INITIAL_STATE = {
   agentRole: "",
@@ -7,16 +9,8 @@ const INITIAL_STATE = {
   isAgentSearch: false,
   isAgentInfo: false,
   isWorkflow: false,
-  agentInfo: {
-    firstName: "",
-    middleName: "",
-    lastName: "",
-    sid: "",
-    repCode: "",
-    branchCode: "",
-    suffix: "",
-  },
-  workFlowInfo: {},
+  agentInfo: new AgentModel(),
+  workFlowInfo: new WorkFlowModel(),
 };
 const createFormReducer = (state = INITIAL_STATE, action) => {
   let tempState;
@@ -30,6 +24,7 @@ const createFormReducer = (state = INITIAL_STATE, action) => {
         agentRole: action.payload.agentRole,
         isWorkflow: state.isWorkflow,
         agentInfo: state.agentInfo,
+        workFlowInfo: state.workFlowInfo,
       };
       break;
 
@@ -38,9 +33,10 @@ const createFormReducer = (state = INITIAL_STATE, action) => {
         isAgentInfo: true,
         isAgentSearch: true,
         agentSid: action.payload.agentSid,
-        agentRole: action.payload.agentRole,
+        agentRole: state.agentRole,
         isWorkflow: state.isWorkflow,
         agentInfo: action.payload.agentInfo,
+        workFlowInfo: state.workFlowInfo,
       };
       break;
 
@@ -49,9 +45,10 @@ const createFormReducer = (state = INITIAL_STATE, action) => {
         isAgentInfo: state.isAgentInfo,
         isAgentSearch: true,
         agentSid: action.payload.agentSid,
-        agentRole: action.payload.agentRole,
+        agentRole: state.agentRole,
         isWorkflow: state.isWorkflow,
         agentInfo: state.agentInfo,
+        workFlowInfo: state.workFlowInfo,
       };
       break;
 
@@ -59,10 +56,11 @@ const createFormReducer = (state = INITIAL_STATE, action) => {
       tempState = {
         isAgentInfo: true,
         isAgentSearch: true,
-        agentRole: action.payload.agentRole,
+        agentRole: state.agentRole,
         agentSid: state.agentSid,
         isWorkflow: state.isWorkflow,
         agentInfo: state.agentInfo,
+        workFlowInfo: state.workFlowInfo,
       };
       break;
 
@@ -74,7 +72,8 @@ const createFormReducer = (state = INITIAL_STATE, action) => {
         agentSid: state.agentSid,
         agentRole: action.payload.agentRole,
         isWorkflow: state.isWorkflow,
-        agentInfo: state.agentInfo,
+        agentInfo: action.payload.agentInfo,
+        workFlowInfo: state.workFlowInfo,
       };
       break;
 
@@ -86,6 +85,7 @@ const createFormReducer = (state = INITIAL_STATE, action) => {
         agentRole: state.agentRole,
         isWorkflow: state.isWorkflow,
         agentInfo: state.agentInfo,
+        workFlowInfo: state.workFlowInfo,
       };
       break;
 

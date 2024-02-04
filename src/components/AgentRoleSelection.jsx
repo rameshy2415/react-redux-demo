@@ -2,17 +2,36 @@ import Form from "react-bootstrap/Form";
 import { useDispatch } from "react-redux";
 import Card from "react-bootstrap/Card";
 import classes from "./Body.module.css";
+import { roleSelectionAction } from "../actions/RoleSelectionActions";
+
 const AgentRoleSelection = () => {
   const dispatch = useDispatch();
 
   const selectionHandler = (event) => {
     const agentRole = event.target.value;
 
-    if (agentRole === "agent") {
-      dispatch({ type: "AGENT_INFO", payload: { agentRole: agentRole } });
-    }
     if (agentRole === "delegate") {
-      dispatch({ type: "DELEGATE_VIEW", payload: { agentRole: agentRole } });
+      //dispatch({ type: "DELEGATE_VIEW", payload: { agentRole: agentRole } });
+      dispatch(roleSelectionAction.delegateView({ agentRole: agentRole }));
+    }
+
+    if (agentRole === "agent") {
+      const agentInfo = {
+        firstName: "Mayur",
+        middleName: "-",
+        lastName: "Panjwani",
+        sid: "F123456",
+        repCode: "JA8",
+        branchCode: "",
+        suffix: "Mr.",
+      };
+      //dispatch({ type: "AGENT_INFO", payload: { agentRole: agentRole, agentInfo:agentInfo } });
+      dispatch(
+        roleSelectionAction.agentView({
+          agentRole: agentRole,
+          agentInfo: agentInfo,
+        })
+      );
     }
   };
 
