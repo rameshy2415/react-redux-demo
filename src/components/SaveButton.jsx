@@ -1,7 +1,10 @@
 import Button from "react-bootstrap/Button";
 import classes from "./Body.module.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { uiNotificationAction } from "../actions/uiNotificationActions";
 const SaveButton = () => {
+
+  const dispatch = useDispatch()
   
   const agentInfo = useSelector(
     (state) => state.roleSelectionDetails.agentInfo
@@ -11,6 +14,8 @@ const SaveButton = () => {
 
     if (saveType === "SAVE") {
       console.log("Save clicked");
+      dispatch(uiNotificationAction.showNotification({status:'success', title:'Success!', message:'successfully saved..', isNotification:true}))
+
     }
     if (saveType === "SAVE_NEXT") {
       console.log("Save clicked");
