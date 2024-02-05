@@ -2,22 +2,25 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import classes from "../Body.module.css";
 import { Card } from "react-bootstrap";
+import TableView from "../commons/TableView";
 
 import { useState } from "react";
-// import { useDispatch } from "react-redux";
-// import { roleSelectionAction } from "../../store/applicationStore";
+import { useDispatch, useSelector } from "react-redux";
+import { accountOwnerActions } from "../../actions/AccountOwnerActions";
 
 const ECISearch = () => {
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [eci, setEci] = useState("");
+  const isTableVisible = useSelector(state => state.accountOwnerDetails.isTableVisible)
 
-  const agentSearchHandler = () => {
-    setEci(eci);
-    // dispatch(roleSelectionAction.setAgentSid({ eci: eci }))
+  const eciSearchHandler = () => {
+    //setEci(eci);
+    dispatch(accountOwnerActions.eciSearchHandler({eci:eci, isTableVisible:true}))
   };
 
   const changeHandler = (event) => {
-    setEci(event.target.value);
+    const eci = event.target.value
+    setEci(eci);
   };
 
   return (
@@ -27,7 +30,6 @@ const ECISearch = () => {
           <Card.Title>
             <strong>ECI Search</strong>
           </Card.Title>
-          <hr></hr>
             <div className={classes.agnt_search}>
               <Form.Control
                 type="input"
@@ -41,10 +43,13 @@ const ECISearch = () => {
               <Button
                 className={classes.agnt_search_btn}
                 variant="success"
-                onClick={agentSearchHandler}
+                onClick={eciSearchHandler}
               >
                 search
               </Button>{" "}
+            </div>
+            <div>
+          {isTableVisible && <TableView />}  
             </div>
         </Card.Body>
       </Card>

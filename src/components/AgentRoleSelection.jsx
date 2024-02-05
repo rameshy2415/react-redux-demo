@@ -12,7 +12,7 @@ const AgentRoleSelection = () => {
 
     if (agentRole === "delegate") {
       //dispatch({ type: "DELEGATE_VIEW", payload: { agentRole: agentRole } });
-      dispatch(roleSelectionAction.delegateView({ agentRole: agentRole }));
+      dispatch(roleSelectionAction.delegateView({ agentRole: agentRole , agentSid:''}));
     }
 
     if (agentRole === "agent") {
@@ -30,6 +30,7 @@ const AgentRoleSelection = () => {
         roleSelectionAction.agentView({
           agentRole: agentRole,
           agentInfo: agentInfo,
+          agentSid:''
         })
       );
     }

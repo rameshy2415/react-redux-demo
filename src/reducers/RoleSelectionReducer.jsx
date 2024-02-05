@@ -27,6 +27,7 @@ const ROLE_SELECTION_INITIAL_STATE = {
       delegateView: (state, action) => {
         state.isAgentInfo = false;
         state.isAgentSearch = true;
+        state.agentSid = action.payload.agentSid;
         state.agentRole = action.payload.agentRole;
       },
   
@@ -47,6 +48,7 @@ const ROLE_SELECTION_INITIAL_STATE = {
         state.isAgentSearch = false;
         state.agentRole = action.payload.agentRole;
         state.agentInfo = action.payload.agentInfo;
+        state.agentSid = action.payload.agentSid;
       },
   
       removeAgentView: (state) => {

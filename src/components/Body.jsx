@@ -8,6 +8,8 @@ import AccountOwnerUI from "./accountOwner/AccountOwnerUI";
 import Notification from "./commons/Notification";
 import { useDispatch } from "react-redux";
 import {uiNotificationAction} from '../actions/uiNotificationActions'
+import PlanSelectionUI from './planSelection/PlanSelection'
+import RegBiUI from "./regBI/RegBI";
 
 const Body = () => {
   const dispatch = useDispatch();
@@ -16,6 +18,10 @@ const Body = () => {
   const workFlowInfo = useSelector((state) => state.roleSelectionDetails.workFlowInfo);
   const isNotification = useSelector((state) => state.uiNotofication.isNotification);
   const notification = useSelector((state) => state.uiNotofication.notification);
+  const indexArray = useSelector((state) => state.uiNotofication.indexArray);
+
+  console.log('IndexArray', indexArray);
+
 
 
   if(isNotification){
@@ -25,17 +31,27 @@ const Body = () => {
   }
 
 
+  // const navList = ['roleSelection','accountOwner', 'planSelection']
+  // console.log('navList', navList)
+
+
 
   return (
     <>
       <main>
       {isNotification && <Notification status={notification.status} title={notification.title} message={notification.message} />}
+
+      
         <AgentRoleSelection />
         {isAgentSearch && <AgentSearch />}
         {isAgentInfo && <AgentInfo />}
         {isAgentInfo && <Workflow />}
-        {isAgentInfo && <AccountOwnerUI />}
+        {isAgentInfo && (indexArray.indexOf(1) !== -1) && <AccountOwnerUI />}
+        {isAgentInfo && (indexArray.indexOf(2) !== -1) && <PlanSelectionUI />}
+        {isAgentInfo && (indexArray.indexOf(3) !== -1) && <RegBiUI />}
         {isAgentInfo &&  <SaveButton workFlowData={workFlowInfo} />}
+
+        
         
       </main>
     </>

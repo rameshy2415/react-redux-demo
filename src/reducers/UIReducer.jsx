@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initial_state = {
   isNotification: false,
   notification: { status: "", message: "", title: "" },
+  indexArray: [0],
+  currentIndex: 0
 };
 
 export const uiNotificationSlice = createSlice({
@@ -22,5 +24,10 @@ export const uiNotificationSlice = createSlice({
       state.notification.message = action.payload.message;
       state.notification.title = action.payload.title;
     },
+
+    updateIndexAndArray: (state, action)=>{
+      state.indexArray = action.payload.indexArray;
+      state.currentIndex = action.payload.currentIndex;
+    }
   },
 });

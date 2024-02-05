@@ -3,9 +3,13 @@ import classes from "./Body.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { uiNotificationAction } from "../actions/uiNotificationActions";
 const SaveButton = () => {
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
-  
+  const indexArray = useSelector((state) => state.uiNotofication.indexArray);
+  const currentIndex = useSelector(
+    (state) => state.uiNotofication.currentIndex
+  );
+
   const agentInfo = useSelector(
     (state) => state.roleSelectionDetails.agentInfo
   );
@@ -14,13 +18,42 @@ const SaveButton = () => {
 
     if (saveType === "SAVE") {
       console.log("Save clicked");
-      dispatch(uiNotificationAction.showNotification({status:'success', title:'Success!', message:'successfully saved..', isNotification:true}))
-
+      dispatch(
+        uiNotificationAction.showNotification({
+          status: "success",
+          title: "Success!",
+          message: "successfully saved..",
+          isNotification: true,
+        })
+      );
     }
     if (saveType === "SAVE_NEXT") {
+      const tempArray = [...indexArray];
+      const tempIndex = currentIndex + 1;
+      tempArray.push(tempIndex);
+      dispatch(
+        uiNotificationAction.updateIndexAndArray({
+          currentIndex: tempIndex,
+          indexArray: tempArray,
+        })
+      );
       console.log("Save clicked");
     }
   };
+
+  let buttonContent = (
+    <Button variant="primary" onClick={() => saveHandler("SAVE_NEXT")}>
+      Save & Continue
+    </Button>
+  );
+
+  if (indexArray.length === 4) {
+    buttonContent = (
+      <Button variant="primary" onClick={() => saveHandler("SUBMIT")}>
+        Submit
+      </Button>
+    );
+  }
 
   return (
     <>
@@ -28,9 +61,7 @@ const SaveButton = () => {
         <Button variant="primary" onClick={() => saveHandler("SAVE")}>
           Save Draft
         </Button>{" "}
-        <Button variant="primary" onClick={() => saveHandler("SAVE_NEXT")}>
-          Save & Continue
-        </Button>{" "}
+       {buttonContent}
       </div>
     </>
   );

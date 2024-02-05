@@ -1,10 +1,15 @@
 import { Table } from "react-bootstrap";
 import classes from "../Body.module.css";
 
+import { useDispatch } from "react-redux";
+import { accountOwnerActions } from "../../actions/AccountOwnerActions";
+
 const TableView = (props) => {
   const tableColumnHeader = ["ECI", "First Name", "Last Name"];
   const tableRowData = ["12345", "John", "Cena"];
-  console.log('props', props)
+  console.log('Props ', props)
+
+  const dispatch = useDispatch();
 
   const columnHeader = tableColumnHeader.map((item) => {
     return <th key={item}>{item}</th>;
@@ -15,7 +20,7 @@ const TableView = (props) => {
   });
 
   const clickHandler = () => {
-    console.log("Hello");
+    dispatch(accountOwnerActions.hideEciSearchTable({ isTableVisible: false }));
   };
   return (
     <>
