@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { roleSelectionAction } from "../actions/RoleSelectionActions";
 import Card from "react-bootstrap/Card";
+import { fetchPosts } from '../reducers/APICallReducer'
 
 const AgentSearch = () => {
   const dispatch = useDispatch();
@@ -15,11 +16,23 @@ const AgentSearch = () => {
     (state) => state.roleSelectionDetails.isTableVisible
   );
 
+  // const apiDispatch = useDispatch()
+  const { posts, status, isError } = useSelector((state) => state.posts);
+
+  if (status === 'loading') return <div>Loading...</div>;
+  if (status === 'failed') return <div>Error: {isError}</div>;
+
+  console.log('Posts', posts)
+
+
   const agentSearchHandler = () => {
     setSid(sid);
-    // dispatch({ type: "SET_AGENT_SID", payload: { agentSid: sid } });
     dispatch(
       roleSelectionAction.setAgentSid({ agentSid: sid, isTableVisible: true })
+    );
+
+    dispatch(
+      fetchPosts()
     );
   };
 

@@ -16,7 +16,7 @@ function App() {
       <div className="card">
       <h2>Client Onboarding</h2>
       <hr />
-      <h3>{sid && <>BIN:</>} {sid}</h3>
+      <h4>{sid && <>BIN:</>} {sid} {'  '}</h4>
       
         {/* <Main /> */}
         <Body />

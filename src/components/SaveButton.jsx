@@ -47,7 +47,7 @@ const SaveButton = () => {
     </Button>
   );
 
-  if (indexArray.length === 4) {
+  if (indexArray.length === 7) {
     buttonContent = (
       <Button variant="primary" onClick={() => saveHandler("SUBMIT")}>
         Submit
