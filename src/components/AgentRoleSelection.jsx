@@ -1,5 +1,5 @@
 import Form from "react-bootstrap/Form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Card from "react-bootstrap/Card";
 import classes from "./Body.module.css";
 import { roleSelectionAction } from "../actions/RoleSelectionActions";
@@ -7,12 +7,18 @@ import { roleSelectionAction } from "../actions/RoleSelectionActions";
 const AgentRoleSelection = () => {
   const dispatch = useDispatch();
 
+  const agentRole = useSelector(
+    (state) => state.roleSelectionDetails.agentRole
+  );
+
   const selectionHandler = (event) => {
     const agentRole = event.target.value;
 
     if (agentRole === "delegate") {
       //dispatch({ type: "DELEGATE_VIEW", payload: { agentRole: agentRole } });
-      dispatch(roleSelectionAction.delegateView({ agentRole: agentRole , agentSid:''}));
+      dispatch(
+        roleSelectionAction.delegateView({ agentRole: agentRole, agentSid: "" })
+      );
     }
 
     if (agentRole === "agent") {
@@ -30,7 +36,7 @@ const AgentRoleSelection = () => {
         roleSelectionAction.agentView({
           agentRole: agentRole,
           agentInfo: agentInfo,
-          agentSid:''
+          agentSid: "",
         })
       );
     }
@@ -53,16 +59,18 @@ const AgentRoleSelection = () => {
                   id={`reverse-${type}-1`}
                   value="agent"
                   onChange={selectionHandler}
+                  checked={agentRole === 'agent' ? true : false}
                 />
                 <Form.Check
                   inline
                   reverse
                   label="Delegate"
-                  name="group1"
+                  name="group2"
                   type={type}
                   value="delegate"
                   id={`reverse-${type}-2`}
                   onChange={selectionHandler}
+                  checked={agentRole === 'delegate' ? true : false}
                 />
               </div>
             ))}

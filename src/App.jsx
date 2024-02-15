@@ -4,7 +4,8 @@ import './App.css'
 //import Main from './components/Main'
 import Body from './components/Body';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import Signup from './components/forms/SignupForm';
+import NewSignupForm from './components/forms/NewSignup';
 
 function App() {
 
@@ -15,6 +16,9 @@ function App() {
     <>
       <div className="card">
       <h2>Client Onboarding</h2>
+      <NewSignupForm></NewSignupForm>
+      <Signup></Signup>
+
       <hr />
       <h4>{sid && <>BIN:</>} {sid} {'  '}</h4>
       

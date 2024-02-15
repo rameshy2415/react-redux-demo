@@ -13,8 +13,34 @@ import RegBiUI from "./regBI/RegBI";
 import LanguageConsentUI from "./languageConsent/LanguageConsent";
 import BrokerageAccountLinkingtUI from "./brokerageAccountLinking/BrokerageLinkingAccount";
 import TcpUI from "./trustedContactPerson/Tcp";
+import { useEffect } from "react";
+import { roleSelectionAction } from "../actions/RoleSelectionActions";
 
 const Body = () => {
+
+useEffect(()=>{
+
+  if(sessionStorage.getItem('roleSelection')){
+
+    console.log('Whole State', sessionStorage.getItem('roleSelection'))
+
+    const data = JSON.parse(sessionStorage.getItem('roleSelection'))
+
+    console.log('Whole Data', data)
+    dispatch(
+      roleSelectionAction.overrideState({ ...data })
+      //roleSelectionAction.delegateView({ agentRole: 'delegate', agentSid: "" })
+    ) 
+  }
+
+},[])
+
+const agentRole = useSelector(
+  (state) => state.roleSelectionDetails.agentRole
+);
+
+ console.log('agentRole Data', agentRole)
+
   const dispatch = useDispatch();
   const isAgentSearch = useSelector(
     (state) => state.roleSelectionDetails.isAgentSearch
@@ -33,7 +59,11 @@ const Body = () => {
   );
   const indexArray = useSelector((state) => state.uiNotofication.indexArray);
 
-  console.log("IndexArray", indexArray);
+  const agentInfo = useSelector(
+    (state) => state.roleSelectionDetails.agentInfo
+  );
+
+  console.log("AgentInfo", agentInfo);
 
   if (isNotification) {
     setTimeout(() => {

@@ -13,11 +13,14 @@ const SaveButton = () => {
   const agentInfo = useSelector(
     (state) => state.roleSelectionDetails.agentInfo
   );
+  const state = useSelector((state) => state.roleSelectionDetails);
   const saveHandler = (saveType) => {
     console.log("AgentInfo", agentInfo);
 
     if (saveType === "SAVE") {
       console.log("Save clicked");
+      sessionStorage.setItem("roleSelection", JSON.stringify(state));
+
       dispatch(
         uiNotificationAction.showNotification({
           status: "success",
@@ -61,7 +64,7 @@ const SaveButton = () => {
         <Button variant="primary" onClick={() => saveHandler("SAVE")}>
           Save Draft
         </Button>{" "}
-       {buttonContent}
+        {buttonContent}
       </div>
     </>
   );
